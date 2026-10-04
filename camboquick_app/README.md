@@ -1,66 +1,210 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
+Camboquick — Aplicação Laravel
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+Esta pasta contém a aplicação web do Camboquick, sistema de gestão de vendas e estoque desenvolvido com Laravel e PHP.
 
-## About Laravel
+Para conhecer o sistema, suas funcionalidades, módulos e regras de acesso, consulte o README principal.
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+🛠️ Tecnologias
+PHP
+Laravel
+HTML5
+CSS3
+Bootstrap
+JavaScript
+Banco de dados relacional
+📋 Requisitos
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Antes de iniciar a instalação, certifique-se de possuir:
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+PHP instalado.
+Composer instalado.
+Banco de dados compatível com a aplicação.
+Node.js e npm, caso os recursos frontend do projeto utilizem Vite/NPM.
+📥 Instalação
 
-## Learning Laravel
+Existem duas formas de preparar o banco de dados da aplicação.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+Opção 1 — Utilizar a base de dados disponibilizada
 
-You may also try the [Laravel Bootcamp](https://bootcamp.laravel.com), where you will be guided through building a modern Laravel application from scratch.
+Esta opção utiliza a base de dados que está disponível no repositório.
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+1. Clonar o repositório
+git clone <URL-DO-REPOSITORIO>
 
-## Laravel Sponsors
+Entre na pasta do projeto Laravel:
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+cd <pasta-do-laravel>
+2. Instalar as dependências do PHP
+composer install
+3. Configurar o arquivo .env
 
-### Premium Partners
+Crie o arquivo .env a partir do exemplo:
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[WebReinvent](https://webreinvent.com/)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Jump24](https://jump24.co.uk)**
-- **[Redberry](https://redberry.international/laravel/)**
-- **[Active Logic](https://activelogic.com)**
-- **[byte5](https://byte5.de)**
-- **[OP.GG](https://op.gg)**
+cp .env.example .env
 
-## Contributing
+No Windows, também é possível criar o arquivo manualmente a partir do .env.example.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+Configure as informações de conexão com o banco de dados.
 
-## Code of Conduct
+Exemplo:
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=camboquick_lua_cheia
+DB_USERNAME=root
+DB_PASSWORD=
 
-## Security Vulnerabilities
+Ajuste DB_USERNAME e DB_PASSWORD conforme a configuração do seu ambiente.
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+4. Gerar a chave da aplicação
+php artisan key:generate
+5. Importar a base de dados
 
-## License
+Importe o arquivo de banco de dados disponibilizado no repositório para o seu servidor MySQL/MariaDB.
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+Depois, confirme se o nome da base de dados corresponde ao configurado no .env:
+
+DB_DATABASE=camboquick_lua_cheia
+
+Nesta opção, não é necessário executar php artisan migrate nem php artisan db:seed, pois a base de dados já será disponibilizada no repositório.
+
+🗄️ Opção 2 — Criar o banco utilizando Laravel
+
+Também é possível configurar a aplicação utilizando as migrations e seeders do Laravel.
+
+1. Instalar as dependências
+composer install
+2. Configurar o .env
+
+Crie o arquivo:
+
+cp .env.example .env
+
+Configure a conexão com o banco de dados:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=camboquick_lua_cheia
+DB_USERNAME=root
+DB_PASSWORD=
+
+Antes de executar as migrations, certifique-se de que o banco de dados configurado existe no servidor MySQL/MariaDB.
+
+3. Gerar a chave da aplicação
+php artisan key:generate
+4. Executar as migrations
+php artisan migrate
+5. Executar o seeder
+php artisan db:seed
+
+As migrations criarão a estrutura do banco de dados e o seeder poderá inserir os dados iniciais necessários para a aplicação.
+
+📦 Dependências do frontend
+
+Caso o projeto possua dependências JavaScript configuradas no package.json, instale-as com:
+
+npm install
+
+Durante o desenvolvimento, execute:
+
+npm run dev
+
+Se o projeto não utilizar um processo de desenvolvimento frontend separado, este passo pode ser ignorado.
+
+▶️ Executando a aplicação
+
+Depois de concluir a configuração:
+
+php artisan serve
+
+Por padrão, a aplicação poderá ser acessada em:
+
+http://127.0.0.1:8000
+🔧 Principais comandos
+Iniciar o servidor
+php artisan serve
+Executar migrations
+php artisan migrate
+Executar seeders
+php artisan db:seed
+Limpar os caches da aplicação
+php artisan optimize:clear
+Instalar dependências PHP
+composer install
+Instalar dependências JavaScript
+npm install
+🏗️ Arquitetura
+
+A aplicação utiliza a arquitetura MVC (Model-View-Controller) do Laravel.
+
+Principais diretórios:
+
+app/
+├── Http/
+├── Models/
+└── ...
+
+database/
+├── migrations/
+├── seeders/
+└── ...
+
+resources/
+├── views/
+└── ...
+
+routes/
+├── web.php
+└── ...
+
+public/
+app/
+
+Contém a lógica principal da aplicação, incluindo models, controllers e outros componentes.
+
+database/
+
+Contém as migrations e seeders utilizados para estruturar e inicializar o banco de dados.
+
+resources/
+
+Contém os recursos da interface da aplicação, incluindo as views.
+
+routes/
+
+Contém as rotas utilizadas pela aplicação.
+
+public/
+
+Contém os arquivos públicos da aplicação.
+
+🔐 Controle de acesso
+
+O sistema possui diferentes funções de usuário:
+
+Administrador
+Gerente
+Caixa
+
+As permissões de cada função determinam quais funcionalidades podem ser acessadas dentro da aplicação.
+
+🗃️ Base de dados
+
+O repositório contém uma cópia da base de dados para facilitar a configuração do projeto.
+
+Também é possível criar a estrutura do banco utilizando as migrations e inicializar os dados através dos seeders.
+
+Nome utilizado na configuração:
+
+DB_DATABASE=camboquick_lua_cheia
+🔙 Voltar para a documentação principal
+
+Para conhecer o objetivo do Camboquick, suas funcionalidades, módulos e níveis de acesso:
+
+👉 Voltar para o README principal
+
+Camboquick — Sistema de gestão de vendas e estoque
+
+Desenvolvido por Azevaldo Caluaco.
