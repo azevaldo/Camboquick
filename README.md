@@ -130,6 +130,7 @@ camboquick/
 O README.md da raiz apresenta o sistema e suas funcionalidades.
 
 O README.md localizado dentro da aplicação Laravel contém as instruções técnicas para instalação e configuração do projeto.
+https://github.com/azevaldo/Camboquick/blob/main/camboquick_app/README.md
 
 🛠️ Tecnologias utilizadas
 PHP
