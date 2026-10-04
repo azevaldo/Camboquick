@@ -11,75 +11,40 @@ HTML5
 CSS3
 Bootstrap
 JavaScript
-Banco de dados relacional
+MySQL/MariaDB
 📋 Requisitos
 
 Antes de iniciar a instalação, certifique-se de possuir:
 
 PHP instalado.
 Composer instalado.
-Banco de dados compatível com a aplicação.
-Node.js e npm, caso os recursos frontend do projeto utilizem Vite/NPM.
+MySQL ou MariaDB.
+Um ambiente local para executar a aplicação, como XAMPP, Laragon ou similar.
 📥 Instalação
 
-Existem duas formas de preparar o banco de dados da aplicação.
+Existem duas formas de configurar o banco de dados do Camboquick.
 
 Opção 1 — Utilizar a base de dados disponibilizada
 
-Esta opção utiliza a base de dados que está disponível no repositório.
+Esta é a forma mais simples de executar o projeto.
+
+A base de dados já está disponibilizada no repositório. Portanto, não é necessário executar migrations nem seeders.
 
 1. Clonar o repositório
-git clone <URL-DO-REPOSITORIO>
+git clone https://github.com/azevaldo/Camboquick.git
 
-Entre na pasta do projeto Laravel:
+Entre na pasta da aplicação Laravel:
 
-cd <pasta-do-laravel>
-2. Instalar as dependências do PHP
+cd Camboquick/camboquick_app
+2. Instalar as dependências
 composer install
 3. Configurar o arquivo .env
 
-Crie o arquivo .env a partir do exemplo:
+Crie o arquivo .env:
 
 cp .env.example .env
 
-No Windows, também é possível criar o arquivo manualmente a partir do .env.example.
-
-Configure as informações de conexão com o banco de dados.
-
-Exemplo:
-
-DB_CONNECTION=mysql
-DB_HOST=127.0.0.1
-DB_PORT=3306
-DB_DATABASE=camboquick_lua_cheia
-DB_USERNAME=root
-DB_PASSWORD=
-
-Ajuste DB_USERNAME e DB_PASSWORD conforme a configuração do seu ambiente.
-
-4. Gerar a chave da aplicação
-php artisan key:generate
-5. Importar a base de dados
-
-Importe o arquivo de banco de dados disponibilizado no repositório para o seu servidor MySQL/MariaDB.
-
-Depois, confirme se o nome da base de dados corresponde ao configurado no .env:
-
-DB_DATABASE=camboquick_lua_cheia
-
-Nesta opção, não é necessário executar php artisan migrate nem php artisan db:seed, pois a base de dados já será disponibilizada no repositório.
-
-🗄️ Opção 2 — Criar o banco utilizando Laravel
-
-Também é possível configurar a aplicação utilizando as migrations e seeders do Laravel.
-
-1. Instalar as dependências
-composer install
-2. Configurar o .env
-
-Crie o arquivo:
-
-cp .env.example .env
+No Windows, também é possível criar o arquivo .env manualmente a partir do .env.example.
 
 Configure a conexão com o banco de dados:
 
@@ -90,36 +55,79 @@ DB_DATABASE=camboquick_lua_cheia
 DB_USERNAME=root
 DB_PASSWORD=
 
-Antes de executar as migrations, certifique-se de que o banco de dados configurado existe no servidor MySQL/MariaDB.
+Ajuste DB_USERNAME e DB_PASSWORD de acordo com a configuração do seu ambiente.
 
-3. Gerar a chave da aplicação
+4. Criar a chave da aplicação
 php artisan key:generate
-4. Executar as migrations
+5. Importar a base de dados
+
+Importe o arquivo de banco de dados disponibilizado no repositório para o MySQL/MariaDB.
+
+Depois, confirme se o nome da base de dados configurado no .env corresponde ao banco importado:
+
+DB_DATABASE=camboquick_lua_cheia
+
+Importante: ao utilizar a base de dados já pronta, não execute:
+
 php artisan migrate
-5. Executar o seeder
+
+nem:
+
 php artisan db:seed
 
-As migrations criarão a estrutura do banco de dados e o seeder poderá inserir os dados iniciais necessários para a aplicação.
+A estrutura e os dados da aplicação já estão presentes na base de dados disponibilizada.
 
-📦 Dependências do frontend
-
-Caso o projeto possua dependências JavaScript configuradas no package.json, instale-as com:
-
-npm install
-
-Durante o desenvolvimento, execute:
-
-npm run dev
-
-Se o projeto não utilizar um processo de desenvolvimento frontend separado, este passo pode ser ignorado.
-
-▶️ Executando a aplicação
-
-Depois de concluir a configuração:
-
+6. Executar a aplicação
 php artisan serve
 
-Por padrão, a aplicação poderá ser acessada em:
+Acesse:
+
+http://127.0.0.1:8000
+Opção 2 — Criar o banco utilizando Laravel
+
+Nesta opção, a base de dados é criada utilizando as migrations e os dados iniciais são inseridos através dos seeders do Laravel.
+
+1. Clonar o repositório
+git clone https://github.com/azevaldo/Camboquick.git
+
+Entre na pasta da aplicação:
+
+cd Camboquick/camboquick_app
+2. Instalar as dependências
+composer install
+3. Configurar o .env
+
+Crie o arquivo:
+
+cp .env.example .env
+
+Configure a conexão com o banco:
+
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=camboquick_lua_cheia
+DB_USERNAME=root
+DB_PASSWORD=
+
+Certifique-se de que o banco de dados camboquick_lua_cheia existe no MySQL/MariaDB.
+
+4. Gerar a chave da aplicação
+php artisan key:generate
+5. Executar as migrations
+php artisan migrate
+
+As migrations irão criar as tabelas necessárias para o funcionamento da aplicação.
+
+6. Executar os seeders
+php artisan db:seed
+
+Os seeders irão inserir os dados iniciais definidos pelo projeto.
+
+7. Executar a aplicação
+php artisan serve
+
+Acesse:
 
 http://127.0.0.1:8000
 🔧 Principais comandos
@@ -127,14 +135,18 @@ Iniciar o servidor
 php artisan serve
 Executar migrations
 php artisan migrate
+
+Utilize este comando apenas quando estiver configurando o banco através das migrations.
+
 Executar seeders
 php artisan db:seed
-Limpar os caches da aplicação
+
+Utilize este comando apenas quando estiver configurando o banco através dos seeders.
+
+Limpar os caches
 php artisan optimize:clear
 Instalar dependências PHP
 composer install
-Instalar dependências JavaScript
-npm install
 🏗️ Arquitetura
 
 A aplicação utiliza a arquitetura MVC (Model-View-Controller) do Laravel.
@@ -162,7 +174,7 @@ routes/
 public/
 app/
 
-Contém a lógica principal da aplicação, incluindo models, controllers e outros componentes.
+Contém a lógica principal da aplicação, incluindo controllers, models e outros componentes.
 
 database/
 
@@ -182,19 +194,26 @@ Contém os arquivos públicos da aplicação.
 
 🔐 Controle de acesso
 
-O sistema possui diferentes funções de usuário:
+O sistema possui três funções principais:
 
 Administrador
 Gerente
 Caixa
 
-As permissões de cada função determinam quais funcionalidades podem ser acessadas dentro da aplicação.
+Cada função possui diferentes níveis de acesso às funcionalidades da aplicação.
 
-🗃️ Base de dados
+🗃️ Banco de dados
 
-O repositório contém uma cópia da base de dados para facilitar a configuração do projeto.
+O projeto oferece duas possibilidades para configuração do banco:
 
-Também é possível criar a estrutura do banco utilizando as migrations e inicializar os dados através dos seeders.
+Base de dados pronta:
+Importe a base disponibilizada no repositório e configure o .env. Não é necessário executar migrations ou seeders.
+
+Banco através do Laravel:
+Crie o banco e execute:
+
+php artisan migrate
+php artisan db:seed
 
 Nome utilizado na configuração:
 
@@ -203,7 +222,7 @@ DB_DATABASE=camboquick_lua_cheia
 
 Para conhecer o objetivo do Camboquick, suas funcionalidades, módulos e níveis de acesso:
 
-👉 Voltar para o README principal https://github.com/azevaldo/Camboquick/blob/main/README.md
+👉 Voltar para o README principal
 
 Camboquick — Sistema de gestão de vendas e estoque
 
