@@ -218,7 +218,7 @@ php artisan db:seed
 Nome utilizado na configuração:
 
 DB_DATABASE=camboquick_lua_cheia
-🔙 Voltar para a documentação principal
+🔙 Voltar para a documentação principal https://github.com/azevaldo/Camboquick/blob/main/README.md
 
 Para conhecer o objetivo do Camboquick, suas funcionalidades, módulos e níveis de acesso:
 
