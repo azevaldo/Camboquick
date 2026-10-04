@@ -203,7 +203,7 @@ DB_DATABASE=camboquick_lua_cheia
 
 Para conhecer o objetivo do Camboquick, suas funcionalidades, módulos e níveis de acesso:
 
-👉 Voltar para o README principal
+👉 Voltar para o README principal https://github.com/azevaldo/Camboquick/blob/main/README.md
 
 Camboquick — Sistema de gestão de vendas e estoque
 
